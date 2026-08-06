@@ -1,5 +1,5 @@
 # Git Team Todo App
-
+Welcome to our Devops Git Learning Project by chakri.
 ## Team Members
 - Chakri
 - Narasimha
