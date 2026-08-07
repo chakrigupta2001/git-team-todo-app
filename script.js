@@ -1,7 +1,7 @@
 const addButton = document.getElementById("addBtn");
 const taskInput = document.getElementById("taskInput");
 const taskList = document.getElementById("taskList");
-console.log("helo");
+console.log("Mohan");
 
 addButton.addEventListener("click", function () {
 
