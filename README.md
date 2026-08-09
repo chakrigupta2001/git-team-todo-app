@@ -8,3 +8,5 @@ welcome to git our collaboration project.
 
 ## Objective
 Learn Git and GitHub collaboration by building a Todo application.
+
+Testing Fetch on Main Branch
