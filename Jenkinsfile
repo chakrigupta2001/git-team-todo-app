@@ -77,18 +77,26 @@ pipeline {
         stage('Deploy from Registry') {
             steps {
                 sh '''
-                    # Stop and remove existing container
+                    echo "===== STOP OLD CONTAINER ====="
                     docker stop git-team-todo-app || true
+
+                    echo "===== REMOVE OLD CONTAINER ====="
                     docker rm git-team-todo-app || true
 
-                    # Remove local image to prove pulling from Docker Hub works
+                    echo "===== REMOVE LOCAL IMAGE ====="
                     docker rmi ${DOCKER_HUB_REPO}:${IMAGE_TAG} || true
 
-                    # Pull latest image from Docker Hub and run
+                    echo "===== PULL IMAGE FROM DOCKER HUB ====="
+                    docker pull ${DOCKER_HUB_REPO}:${IMAGE_TAG}
+
+                    echo "===== RUN CONTAINER ====="
                     docker run -d \
-                      --name git-team-todo-app \
-                      -p 8082:8082 \
-                      ${DOCKER_HUB_REPO}:${IMAGE_TAG}
+                    --name git-team-todo-app \
+                    -p 8082:8082 \
+                    ${DOCKER_HUB_REPO}:${IMAGE_TAG}
+
+                    echo "===== CONTAINER STATUS ====="
+                    docker ps
                 '''
             }
         }
