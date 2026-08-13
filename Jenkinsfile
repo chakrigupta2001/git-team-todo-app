@@ -80,7 +80,7 @@ pipeline {
                     echo "===== STOP OLD CONTAINER ====="
                     docker stop git-team-todo-app || true
 
-                    echo "===== REMOVE OLD CONTAINER ====="
+                    echo "===== REMOVING OLD CONTAINER ====="
                     docker rm git-team-todo-app || true
 
                     echo "===== REMOVE LOCAL IMAGE ====="
