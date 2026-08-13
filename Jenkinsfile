@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_HUB_REPO = 'chakrigupta2001/git-team-todo-app'
+        DOCKER_HUB_REPO = 'chakrigupta/git-team-todo-app'
         IMAGE_TAG = '1.0.0'
     }
 
