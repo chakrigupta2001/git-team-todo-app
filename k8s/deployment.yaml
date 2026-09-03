@@ -6,7 +6,7 @@ metadata:
   labels:
     app: git-team-todo
 spec:
-  replicas: 2
+  replicas: 3
 
   strategy:
     type: RollingUpdate
