@@ -613,8 +613,10 @@ Here is the live Argo CD dashboard showing the application in a **Healthy** and 
 ### 2. Resource Tree & Kubernetes Workloads (Deployments, Services, Ingress, Pods)
 ![Argo CD Resource Tree](screenshots/argo-tree.png)
 
-# 🌐 Live Architecture & Workflow
-> **[Click here to view the Interactive Architecture Diagram](https://chakrigupta2001.github.io/git-team-todo-app/docs/final_architecture.html)**
+## 🌐 Interactive Architecture & Workflow
 
-![Architecture Preview](screenshots/architecture-preview.png)
-*(Or chusukunna screenshot image ikkada pettukovachu)*
+![Enterprise Architecture](screenshots/architecture-preview.png)
+
+Here is the live execution of the enterprise DevOps and GitOps architecture pipeline:
+
+https://github.com/chakrigupta2001/git-team-todo-app/raw/main/screenshots/architecture-demo.mp4
