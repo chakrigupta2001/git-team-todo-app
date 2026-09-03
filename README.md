@@ -601,3 +601,20 @@ Spring Boot Application
 
 The primary objective of this project is to gain practical experience in **DevOps, CI/CD, containerization, Kubernetes, and GitOps**, while following a collaborative GitHub-based development workflow.
 
+---
+
+## 📸 Argo CD Dashboard & GitOps Validation
+
+Here is the live Argo CD dashboard showing the application in a **Healthy** and **Synced** state, automatically managing the Kubernetes resources via GitOps:
+
+### 1. Applications Overview (Healthy & Synced)
+![Argo CD Apps](screenshots/argo-apps.png)
+
+### 2. Resource Tree & Kubernetes Workloads (Deployments, Services, Ingress, Pods)
+![Argo CD Resource Tree](screenshots/argo-tree.png)
+
+# 🌐 Live Architecture & Workflow
+> **[Click here to view the Interactive Architecture Diagram](https://chakrigupta2001.github.io/git-team-todo-app/docs/final_architecture.html)**
+
+![Architecture Preview](screenshots/architecture-preview.png)
+*(Or chusukunna screenshot image ikkada pettukovachu)*

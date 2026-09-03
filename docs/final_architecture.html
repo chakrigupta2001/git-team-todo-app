@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enterprise DevOps & GitOps Architecture</title>
+    <!-- Add FontAwesome for Action Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: #080c14; color: #c9d1d9; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; padding: 40px 20px; }
+
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: 28px; font-weight: 700; color: #58a6ff; letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase; text-shadow: 0 0 20px rgba(88,166,255,0.3); }
+        .header p { color: #8b949e; font-size: 13px; font-weight: 500; }
+
+        .pipeline-wrapper { display: flex; align-items: center; gap: 12px; width: 100%; max-width: 1450px; position: relative; }
+
+        .tier-box { flex: 1; background: #111622; border: 1px solid #21262d; border-radius: 12px; padding: 18px 14px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        .tier-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #8b949e; margin-bottom: 14px; border-bottom: 1px solid #21262d; padding-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+        .tier-tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+
+        .tag-git { background: rgba(240, 80, 50, 0.15); color: #f05032; border: 1px solid rgba(240, 80, 50, 0.3); }
+        .tag-jenkins { background: rgba(210, 153, 34, 0.15); color: #d29922; border: 1px solid rgba(210, 153, 34, 0.3); }
+        .tag-docker { background: rgba(47, 129, 247, 0.15); color: #2f81f7; border: 1px solid rgba(47, 129, 247, 0.3); }
+        .tag-argocd { background: rgba(238, 118, 34, 0.15); color: #ff7b72; border: 1px solid rgba(238, 118, 34, 0.3); }
+        .tag-k8s { background: rgba(50, 108, 229, 0.15); color: #58a6ff; border: 1px solid rgba(50, 108, 229, 0.3); }
+
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; transition: all 0.25s ease; display: flex; align-items: center; gap: 10px; }
+        .card:last-child { margin-bottom: 0; }
+        .card:hover { border-color: #58a6ff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(88,166,255,0.15); }
+
+        .card-icon { width: 22px; height: 22px; flex-shrink: 0; display: flex; justify-content: center; align-items: center; }
+        .card-icon img { width: 100%; height: 100%; object-fit: contain; }
+        .card-icon i { font-size: 18px; }
+
+        .card-content { flex-grow: 1; }
+        .card-content .title { font-weight: 600; font-size: 12px; color: #f0f6fc; }
+        .card-content .subtitle { font-size: 10px; color: #8b949e; margin-top: 2px; }
+
+        /* Pulse Connector Line between Tiers */
+        .tier-connector { width: 12px; height: 3px; background: #21262d; position: relative; border-radius: 2px; overflow: hidden; flex-shrink: 0; }
+        .tier-connector::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, #58a6ff, transparent); animation: pulseFlow 1.8s infinite linear; }
+
+        @keyframes pulseFlow { 0% { left: -100%; } 100% { left: 100%; } }
+
+        .status-footer { margin-top: 30px; display: flex; gap: 15px; align-items: center; flex-wrap: wrap; justify-content: center; }
+        .pill { background: #111622; border: 1px solid #30363d; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .dot-green { background: #3fb950; box-shadow: 0 0 8px #3fb950; }
+        .dot-blue { background: #58a6ff; box-shadow: 0 0 8px #58a6ff; }
+        .dot-orange { background: #ff7b72; box-shadow: 0 0 8px #ff7b72; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Enterprise DevOps & GitOps Architecture</h1>
+        <p>Spring Boot • Jenkins CI • SonarQube • Nexus • Docker Hub • Kubernetes • NGINX Ingress • Argo CD</p>
+    </div>
+
+    <div class="pipeline-wrapper">
+
+        <!-- TIER 1: SOURCE CONTROL -->
+        <div class="tier-box">
+            <div class="tier-header">
+                <span>1. Source Control</span>
+                <span class="tier-tag tag-git">Git / GitHub</span>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-laptop-code" style="color: #8b949e;"></i></div>
+                <div class="card-content">
+                    <div class="title">Dev Workstation</div>
+                    <div class="subtitle">Feature Branch Dev</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-code-pull-request" style="color: #58a6ff;"></i></div>
+                <div class="card-content">
+                    <div class="title">Pull Request</div>
+                    <div class="subtitle">Code Review & Merge</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" style="filter: invert(1);" alt="GitHub"></div>
+                <div class="card-content">
+                    <div class="title">GitHub Main Branch</div>
+                    <div class="subtitle">Source Code Repository</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tier-connector"></div>
+
+        <!-- TIER 2: CI & QUALITY -->
+        <div class="tier-box">
+            <div class="tier-header">
+                <span>2. CI & Quality</span>
+                <span class="tier-tag tag-jenkins">Jenkins</span>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins"></div>
+                <div class="card-content">
+                    <div class="title">Jenkins Pipeline</div>
+                    <div class="subtitle">Automated CI Workflow</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sonarqube/sonarqube-original.svg" alt="SonarQube"></div>
+                <div class="card-content">
+                    <div class="title">SonarQube</div>
+                    <div class="subtitle">Quality Gate (Passed)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-box-archive" style="color: #d29922;"></i></div>
+                <div class="card-content">
+                    <div class="title">Nexus Repository</div>
+                    <div class="subtitle">Artifact Management</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tier-connector"></div>
+
+        <!-- TIER 3: CONTAINERIZATION -->
+        <div class="tier-box">
+            <div class="tier-header">
+                <span>3. Containerization</span>
+                <span class="tier-tag tag-docker">Docker Hub</span>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker"></div>
+                <div class="card-content">
+                    <div class="title">Docker Build</div>
+                    <div class="subtitle">Containerize App Image</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-shield-halved" style="color: #d29922;"></i></div>
+                <div class="card-content">
+                    <div class="title">Token Auth</div>
+                    <div class="subtitle">Secure Registry Login</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fa-brands fa-docker" style="color: #2f81f7; font-size: 20px;"></i></div>
+                <div class="card-content">
+                    <div class="title">Docker Hub</div>
+                    <div class="subtitle">Push Image tags (latest)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tier-connector"></div>
+
+        <!-- TIER 4: GITOPS MANIFESTS -->
+        <div class="tier-box">
+            <div class="tier-header">
+                <span>4. GitOps Manifests</span>
+                <span class="tier-tag tag-k8s">K8s Repo</span>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-file-code" style="color: #58a6ff;"></i></div>
+                <div class="card-content">
+                    <div class="title">K8s Manifests</div>
+                    <div class="subtitle">Deployment & Services</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-lock" style="color: #3fb950;"></i></div>
+                <div class="card-content">
+                    <div class="title">ConfigMap & Secret</div>
+                    <div class="subtitle">Environment Configs</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-network-wired" style="color: #d29922;"></i></div>
+                <div class="card-content">
+                    <div class="title">NGINX Ingress</div>
+                    <div class="subtitle">Routing (todo.local)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tier-connector"></div>
+
+        <!-- TIER 5: GITOPS & CLUSTER -->
+        <div class="tier-box">
+            <div class="tier-header">
+                <span>5. GitOps Delivery</span>
+                <span class="tier-tag tag-argocd">Argo CD</span>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-sync fa-spin" style="color: #ff7b72;"></i></div>
+                <div class="card-content">
+                    <div class="title">Argo CD Engine</div>
+                    <div class="subtitle">Auto-Sync / Reconciliation</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-server" style="color: #3fb950;"></i></div>
+                <div class="card-content">
+                    <div class="title">K8s Cluster</div>
+                    <div class="subtitle">Replicas Running (3 Pods)</div>
+                </div>
+            </div>
+
+            <div class="card" style="border-color: #3fb950;">
+                <div class="card-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot"></div>
+                <div class="card-content">
+                    <div class="title">Live Spring App</div>
+                    <div class="subtitle">Healthy & Synced State</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="status-footer">
+        <div class="pill">
+            <div class="dot dot-green"></div>
+            CI/CD Pipeline: Automated
+        </div>
+        <div class="pill">
+            <div class="dot dot-orange"></div>
+            Argo CD State: Synced & Healthy
+        </div>
+        <div class="pill">
+            <div class="dot dot-blue"></div>
+            Kubernetes Replicas: 3/3 Active
+        </div>
+    </div>
+
+</body>
+</html>
