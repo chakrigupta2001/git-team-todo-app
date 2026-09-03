@@ -4,6 +4,7 @@ metadata:
   name: todo-ingress
   namespace: todo-app
 spec:
+  ingressClassName: nginx
   rules:
     - host: todo.local
       http:
