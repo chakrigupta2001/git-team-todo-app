@@ -616,12 +616,3 @@ Here is the live Argo CD dashboard showing the application in a **Healthy** and 
 ## 🌐 Interactive Architecture & Workflow
 
 ![Enterprise Architecture](screenshots/architecture-preview.png)
-
-Here is the live execution of the enterprise DevOps and GitOps architecture pipeline:
-
-<p align="center">
-  <video width="100%" controls autoplay loop muted>
-    <source src="screenshots/architecture-demo.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</p>
